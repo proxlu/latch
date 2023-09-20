@@ -1,0 +1,28 @@
+#!/bin/python3
+#
+# lwatch/latch - by:proxlu
+
+import sys
+import subprocess
+
+# Verificar se foi fornecido algum argumento
+if len(sys.argv) < 2:
+    print("Informe pelo menos um argumento.")
+    sys.exit(1)
+
+# Verificar se o primeiro argumento é um número válido
+try:
+    num_repeticoes = int(sys.argv[1])
+except ValueError:
+    num_repeticoes = 10
+    comandos = sys.argv[1:]
+else:
+    num_repeticoes = max(num_repeticoes, 0)
+    comandos = sys.argv[2:]
+
+# Criar uma única string com os comandos separados por espaço
+comando_str = ' '.join(comandos)
+
+# Executar os comandos o número de vezes especificado
+for _ in range(num_repeticoes):
+    subprocess.run(comando_str, shell=True)
